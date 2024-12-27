@@ -199,7 +199,7 @@
         const data = Object.fromEntries(formData.entries()); // Konversi ke objek
     
         try {
-          const response = await fetch(' URL APLIKASI WEB ', {
+          const response = await fetch('https://script.google.com/macros/s/AKfycbx0e6Le_ZUYZElZEm5KB8MIvF8v8SFpZXUnQNt4PRs942M_eKNh-tBR34LHgbz0zD_qgg/exec', {
             method: 'POST',
             cache: 'no-cache',
             body: new URLSearchParams(data) // Gunakan URL-encoded form data
