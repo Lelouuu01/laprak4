@@ -57,37 +57,41 @@
   </head>
   <body>
     <!-- Navbar -->
-    <!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-  <div class="container">
-    <a class="navbar-brand" href="#">Perpustakaan</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#about">About</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Layanan
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#pendaftaran">Pendaftaran Anggota</a></li>
-            <li><a class="dropdown-item" href="#informasi">Informasi Layanan</a></li>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="pr.jpg" alt="Logo" style="width: 40px; height: 40px; margin-right: 10px;" />
+          Perpustakaan
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#about">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Layanan
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#pendaftaran">Pendaftaran Anggota</a></li>
+                <li><a class="dropdown-item" href="#informasi">Informasi Layanan</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#koleksi">Koleksi</a>
+            </li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#koleksi">Koleksi</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+        </div>
+      </div>
+    </nav>
+    
 
     <!-- Jumbotron -->
     <section id="home" class="jumbotron">
@@ -99,7 +103,7 @@
     <section id="about" class="py-5">
       <div class="container">
         <h2 class="section-title">About Us</h2>
-        <p class="text-center">Perpustakaan sekolah kami menyediakan berbagai koleksi buku untuk mendukung pembelajaran siswa.</p>
+        <p class="text-center">Perpustakaan sekolah kami menyediakan berbagai koleksi buku untuk mendukung pembelajaran siswa. Kami membuat web ini untuk mempermudah prosedur siswa dalam meminjam buku sehingga tidak perlu banyak waktu yang terbuang untuk mencari buku yang siswa inginkan di Perpustakaan. </p>
       </div>
     </section>
 
@@ -108,9 +112,9 @@
       <div class="container">
         <h2 class="section-title">Layanan</h2>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6" id="pendaftaran">
             <h3>Pendaftaran Anggota</h3>
-            <form id="registrationForm">
+            <form id="registrationForm" name="registrationForm">
               <div class="mb-3">
                 <label for="nama" class="form-label">Nama Lengkap</label>
                 <input type="text" class="form-control" id="nama" name="nama" required />
@@ -134,9 +138,9 @@
               <button type="submit" class="btn btn-primary">Daftar</button>
             </form>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" id="informasi">
             <h3>Informasi Layanan</h3>
-            <p>Perpustakaan menyediakan berbagai layanan untuk mendukung kebutuhan informasi siswa.</p>
+            <p>Perpustakaan menyediakan berbagai layanan untuk mendukung kebutuhan informasi siswa. Juga memenuhi keingin para siswa yang gemar membaca kami menyediakan buku yang menarik seperti komik, novel, dan manga. Untuk siswa yang butuh buku pelajaran kami menyediakan buku pemblejaran mulai dari materi-materi sekolah, buku memasak, olahraga dan lain-lain</p>
           </div>
         </div>
       </div>
@@ -190,25 +194,24 @@
       // Form submission handling
       document.getElementById('registrationForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
-        
+    
+        const formData = new FormData(e.target); // Ambil data dari formulir
+        const data = Object.fromEntries(formData.entries()); // Konversi ke objek
+    
         try {
-          const response = await fetch('https://script.google.com/macros/s/AKfycbxtkEi_0Cr3adByiIeQ-aUj1Jrq9vOgdIm_9jqbia6hdk6J55IAH2jLOVGae0-5_d7Klw/exec', {
+          const response = await fetch(' URL APLIKASI WEB ', {
             method: 'POST',
-            mode: 'no-cors',
             cache: 'no-cache',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
+            body: new URLSearchParams(data) // Gunakan URL-encoded form data
           });
-          
-          if (response.type === 'opaque') {
+    
+          if (response.ok) {
             console.log('Form submitted successfully');
             alert('Pendaftaran berhasil!');
             e.target.reset(); // Clear the form
+          } else {
+            console.error('Error:', response.statusText);
+            alert('Terjadi kesalahan saat mengirim data. Silakan coba lagi.');
           }
         } catch (error) {
           console.error('Error:', error);
@@ -218,15 +221,16 @@
     
       // Image error handling
       window.addEventListener('load', () => {
-        const images = document.querySelectorAll('.card-img-top');
+        const images = document.querySelectorAll('img');
         images.forEach(img => {
           img.onerror = function() {
             console.error(`Failed to load image: ${this.src}`);
-            this.src = 'placeholder.jpg'; // Fallback image if original fails to load
+            this.src = 'placeholder.jpg'; // Gambar fallback jika gagal memuat
           };
         });
       });
     </script>
+    
 </body>
 </html>
   </body>
